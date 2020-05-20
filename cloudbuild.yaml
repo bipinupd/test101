@@ -1,3 +1,10 @@
 steps:
-- name: 'ubuntu'
-  args: ['bash', 'echo hello']
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: bash
+  args:
+    - '-c'
+    - |
+      echo Bipin
+      echo $BRANCH_NAME
+      echo $_PR_NUMBER
+  id: "Test"
