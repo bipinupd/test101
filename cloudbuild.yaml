@@ -1,10 +1,15 @@
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
+- name: 'gcr.io/cloud-builders/docker'
   entrypoint: bash
   args:
     - '-c'
     - |
-      URL="https://api.github.com/repos/bipinupd/test101/pulls/${_PR_NUMBER}/files" && \ 
-      FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename') && \ 
-      echo $FILES
-  id: "Test"
+       echo $(curl -s -X GET -G "https://api.github.com/repos/bipinupd/test101/pulls/${_PR_NUMBER}/files") >> files.txt
+  id: "GET FILES"
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: bash
+  args:
+    - '-c'
+    - |
+       cat files.txt
+  id: "Read FILES"
