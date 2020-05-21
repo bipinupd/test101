@@ -1,4 +1,6 @@
 steps:
   - name: 'gcr.io/cloud-builders/git'
     args: ['clone', 'https://github.com/bipinupd/test101.git']
-
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['checkout', $BRANCH_NAME]
+    dir: '$REPO_NAME'
