@@ -4,8 +4,12 @@ steps:
   args:
     - '-c'
     - |
-      echo $BRANCH_NAME
-      URL="https://api.github.com/repos/bipinupd/test101/pulls/${_PR_NUMBER}/files"
+      echo $_PR_NUMBER > prnumber.txt
+  id: "Save PR Number"
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: bash
+  args:
+      URL="https://api.github.com/repos/bipinupd/test101/pulls/`cat prnumber.txt`/files"
       FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
       echo $FILES
-  id: "Test"
+  id: "List Files"
