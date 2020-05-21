@@ -1,17 +1,23 @@
 steps:
   - name: 'gcr.io/cloud-builders/git'
+    args: ['clone', 'https://github.com/bipinupd/test101.git']
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['checkout', ${BRANCH_NAME}]
+    dir: '$REPO_NAME'
+  - name: 'gcr.io/cloud-builders/git'
     args:
       - 'diff'
       - '--name-only'
       - '${BRANCH_NAME}'
       - 'master'
-      - '>>'
-      - 'difffiles.txt'
+      - '--output'
+      - 'difff.txt'
+    dir: '$REPO_NAME'
     id: "Get the Diff Files"
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: bash
     args:
       - '-c'
       - |
-          cat files.txt
+        cat difff.txt
     id: "Read FILES"
