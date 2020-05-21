@@ -1,0 +1,52 @@
+steps:
+  - name: 'gcr.io/bipin-dev/jq:latest'
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+         echo $(curl -s -X GET -G "https://api.github.com/repos/bipinupd/test101/pulls/${_PR_NUMBER}/files" | jq -r '.[] | .filename') >> files.txt
+    id: "GET FILES"
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+         cat files.txt
+    id: "Read FILES"
+
+
+  steps:
+    - name: 'gcr.io/bipin-dev/jq:latest'
+      entrypoint: bash
+      args:
+        - '-c'
+        - |
+            echo $(curl -s -X GET -G "https://api.github.com/repos/bipinupd/test101/pulls/${_PR_NUMBER}/files" | jq -r '.[] | .filename') >> files.txt
+      id: "GET FILES"
+    - name: 'gcr.io/cloud-builders/docker'
+      entrypoint: bash
+      args:
+        - '-c'
+        - |
+            cat files.txt
+      id: "Read FILES"
+
+
+FROM ubuntu:18.04
+RUN apt-get -y update && \
+    apt-get -y install ca-certificates && \
+    apt-get -y install curl && \
+    apt-get -y install jq && \
+    rm -rf /var/lib/apt/lists/*
+ENTRYPOINT ["/usr/bin/jq"]
+
+
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/jq'
+      - '.'
+  images:
+    - 'gcr.io/$PROJECT_ID/jq:latest'
