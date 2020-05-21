@@ -20,4 +20,5 @@ steps:
       - '-c'
       - |
         cat difff.txt
+    dir: '$REPO_NAME'
     id: "Read FILES"
