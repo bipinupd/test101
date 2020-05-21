@@ -19,5 +19,5 @@ steps:
     args:
       - '-c'
       - |
-        cat difff.txt
+         cat difff.txt
     id: "Read FILES"
