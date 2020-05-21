@@ -1,15 +1,15 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  entrypoint: bash
-  args:
-    - '-c'
-    - |
-       echo $(curl -s -X GET -G "https://api.github.com/repos/bipinupd/test101/pulls/${_PR_NUMBER}/files") >> files.txt
-  id: "GET FILES"
-- name: 'gcr.io/cloud-builders/docker'
-  entrypoint: bash
-  args:
-    - '-c'
-    - |
-       cat files.txt
-  id: "Read FILES"
+  - name: 'gcr.io/bipin-dev/jq:latest'
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+         echo $(curl -s -X GET -G "https://api.github.com/repos/bipinupd/test101/pulls/${_PR_NUMBER}/files" | jq -r '.[] | .filename') >> files.txt
+    id: "GET FILES"
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+         cat files.txt
+    id: "Read FILES"
