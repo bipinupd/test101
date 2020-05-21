@@ -5,8 +5,7 @@ steps:
     - '-c'
     - |
       echo $BRANCH_NAME
-      echo $_PR_NUMBER
-      URL="https://api.github.com/repos/bipinupd/pulls/$_PR_NUMBER/files"
+      URL="https://api.github.com/repos/bipinupd/test101/pulls/${_PR_NUMBER}/files"
       FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
       echo $FILES
   id: "Test"
