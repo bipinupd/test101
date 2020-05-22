@@ -1,0 +1,8 @@
+steps:
+  - args:
+      - '-c'
+      - |
+        echo "Example"
+    entrypoint: bash
+    name: gcr.io/cloud-builders/gcloud
+
