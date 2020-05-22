@@ -1,4 +1,4 @@
 steps:
-    args: ['build', 'submit', '--config', 'example.yaml']
-    name: gcr.io/cloud-builders/gcloud
+    - args: ['build', 'submit', '--config', 'example.yaml']
+      name: gcr.io/cloud-builders/gcloud
 
