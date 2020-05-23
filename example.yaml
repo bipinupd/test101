@@ -2,6 +2,7 @@ steps:
   - args:
       - '-c'
       - |
+        sleep 60
         echo "Example"
     entrypoint: bash
     name: gcr.io/cloud-builders/gcloud
