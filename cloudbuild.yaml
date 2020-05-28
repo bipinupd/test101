@@ -11,5 +11,7 @@ steps:
     args:
       - '-c'
       - |
-         cat files.txt
+        echo ${SHORT_SHA} && \
+        echo ${REVISION_ID} && \
+        cat files.txt
     id: "Read FILES"
