@@ -3,7 +3,7 @@ steps:
       - '-c'
       - |
         echo ${SHORT_SHA} && \
-        echo ${REVISION_ID}
+        echo ${COMMIT_SHA}
     entrypoint: bash
     name: gcr.io/cloud-builders/gcloud
   - name: 'gcr.io/cloud-builders/git'

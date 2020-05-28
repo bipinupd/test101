@@ -12,6 +12,6 @@ steps:
       - '-c'
       - |
         echo ${SHORT_SHA} && \
-        echo ${REVISION_ID} && \
+        echo ${COMMIT_SHA} && \
         cat files.txt
     id: "Read FILES"
