@@ -6,4 +6,12 @@ steps:
         echo ${REVISION_ID}
     entrypoint: bash
     name: gcr.io/cloud-builders/gcloud
+  - name: 'gcr.io/cloud-builders/git'
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        git clone https://github.com/bipinupd/test101.git && \
+        cd test101 && \
+        git log
 
