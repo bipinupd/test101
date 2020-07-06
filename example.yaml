@@ -3,7 +3,8 @@ steps:
       - '-c'
       - |
         echo ${SHORT_SHA} && \
-        echo ${REVISION_ID}
+        echo ${REVISION_ID} && \
+        echo "Testing" > /workspace/tt.txt
     entrypoint: bash
     name: gcr.io/cloud-builders/gcloud
   - name: 'gcr.io/cloud-builders/git'
@@ -14,4 +15,6 @@ steps:
         git clone https://github.com/bipinupd/test101.git && \
         cd test101 && \
         git log
+        kk=`cat /workspace/tt.txt`
+        echo $kk
 
