@@ -7,7 +7,7 @@ steps:
         echo "Testing" > /workspace/tt.txt
     entrypoint: bash
     name: gcr.io/cloud-builders/gcloud
-  - name: 'gcr.io/cloud-builders/git'
+  - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: bash
     args:
       - '-c'
