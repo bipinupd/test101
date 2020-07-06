@@ -12,9 +12,6 @@ steps:
     args:
       - '-c'
       - |
-        git clone https://github.com/bipinupd/test101.git && \
-        cd test101 && \
-        git log
         kk=`cat /workspace/tt.txt`
         echo $kk
 
